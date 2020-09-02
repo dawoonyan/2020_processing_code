@@ -1,5 +1,6 @@
 float bodyCenterX, bodyCenterY;    // 몸통 원 중심좌표
 float catHeight;  // 다리 길이?
+float zoomFace;  // 얼굴 줌 
 void setup() {
   size(700, 600);
 
@@ -7,11 +8,17 @@ void setup() {
   bodyCenterY = 340;
 
   catHeight = 60;
+  zoomFace = 1;
 }
 
 void draw() {
   background(#243A89);
 
+  zoomFace = map(sin(map(millis()%2000, 0, 1999, 0, TWO_PI)),
+                -1, 1, 0.9, 1.2); 
+
+  // 마우스 좌표로 고양이 다리 길이 변경토록 한다.
+  catHeight = constrain(map(mouseY, height, 0, 35, 60), 35, 60);
 
   fill(#FFBCF3);
   stroke(#FFAAF1);
@@ -44,7 +51,7 @@ void drawLegAndFoot() {
 void drawFace(float x, float y) {    // 400, 300
   pushMatrix();
   translate(x, y);
-
+  scale(zoomFace, zoomFace);
   // 고양이 귀
   triangle(-40, -50, -40, -13, -13, -35);  // left
   triangle(40, -50, 10, -35, 40, -13);  // right
