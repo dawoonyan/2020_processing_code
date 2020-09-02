@@ -1,10 +1,12 @@
 float bodyCenterX, bodyCenterY;    // 몸통 원 중심좌표
-
+float catHeight;  // 다리 길이?
 void setup() {
   size(700, 600);
-  
+
   bodyCenterX = 360;
   bodyCenterY = 340;
+  
+  catHeight = 60;
 }
 
 void draw() {
@@ -18,19 +20,21 @@ void draw() {
   strokeWeight(3);
 
 
-  //다리,발
-  ellipse(328, 370, 15, 70);  // real left
-  ellipse(308, 370, 15, 70);  // real right
-  ellipse(415, 370, 15, 70);  // front left
-  ellipse(395, 370, 15, 70);  // front right
+  // 다리
+  // 역시 몸통과의 거리를 이용토록 한다.
+  ellipse(bodyCenterX - 32, bodyCenterY + catHeight/2, 15, catHeight);  // real left
+  ellipse(bodyCenterX - 52, bodyCenterY + catHeight/2, 15, catHeight);  // real right
+  ellipse(bodyCenterX + 55, bodyCenterY + catHeight/2, 15, catHeight);  // front left
+  ellipse(bodyCenterX + 35, bodyCenterY + catHeight/2, 15, catHeight);  // front right
 
-  ellipse(315, 400, 25, 20);  // real right
-  ellipse(335, 395, 25, 20);  // rear left
-  ellipse(420, 395, 25, 20);    // front left
-  ellipse(405, 400, 25, 20);    // front right
+  // 발 : y좌표는 다리 길이에 대응토록 한다.
+  ellipse(bodyCenterX - 25, bodyCenterY + catHeight-5, 25, 20);  // rear left
+  ellipse(bodyCenterX - 45, bodyCenterY + catHeight,   25, 20);  // real right
+  ellipse(bodyCenterX + 60, bodyCenterY + catHeight-5, 25, 20);    // front left
+  ellipse(bodyCenterX + 45, bodyCenterY + catHeight,   25, 20);    // front right
 
   drawTail(320, 290, map(millis()%300, 0, 299, 50, 120), map(millis()%200, 0, 199, 50, 120));    // arc centerX, centerY, width, height
-  
+
   //고양이 몸통
   ellipse(bodyCenterX, bodyCenterY, 130, 70);
 
