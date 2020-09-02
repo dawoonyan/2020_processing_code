@@ -1,5 +1,10 @@
+float bodyCenterX, bodyCenterY;    // 몸통 원 중심좌표
+
 void setup() {
   size(700, 600);
+  
+  bodyCenterX = 360;
+  bodyCenterY = 340;
 }
 
 void draw() {
@@ -25,10 +30,11 @@ void draw() {
   ellipse(405, 400, 25, 20);    // front right
 
   drawTail(320, 290, map(millis()%300, 0, 299, 50, 120), map(millis()%200, 0, 199, 50, 120));    // arc centerX, centerY, width, height
+  
   //고양이 몸통
-  ellipse(360, 340, 130, 70);
+  ellipse(bodyCenterX, bodyCenterY, 130, 70);
 
-  drawFace(400, 300);
+  drawFace(bodyCenterX + 40, bodyCenterY - 40);
 }
 
 void drawFace(float x, float y) {    // 400, 300
