@@ -1,1 +1,2 @@
-# 2020_processing_cat_draw
+# 2020_processing_code
+프로세싱 코드 연습
